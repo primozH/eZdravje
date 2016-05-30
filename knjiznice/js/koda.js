@@ -31,12 +31,107 @@ function getSessionId() {
  * @return ehrId generiranega pacienta
  */
 function generirajPodatke(stPacienta) {
-  ehrId = "";
+	var ehrid;
+	var ime, priimek, datum_rojstva;
+	switch(stPacienta){
+		
+		//bolnik, povisan krvni tlak
+		case 1:
+			ime = "Janez";
+			priimek = "Bolan";
+			datum_rojstva = "1954-02-08T06:20";
+			var meritev1;
+			ehrid = novEHR(ime, priimek, datum_rojstva);
 
+
+			break;
+		//sportnica
+		case 2:
+			ime = "Marija";
+			priimek = "Kovač"
+			datum_rojstva = "1981-05-15T02:15";
+
+			ehrid = novEHR(ime, priimek, datum_rojstva);
+
+
+			break;
+		case 3:
+			ime = "Matic";
+			priimek = "Oblak";
+			datum_rojstva = "1998-01-01T14:37";
+
+			ehrid = novEHR(ime, priimek, datum_rojstva);
+			break;
+	}
   // TODO: Potrebno implementirati
 
   return ehrId;
 }
 
+function novEHR(ime, priimek, datum_rojstva){
+	var sessionID = getSessionId();
+	var sporocilo = "";
+	
+	$.ajaxSetup({
+		headers: {"Ehr-Session": sessionID}
+	});
+	$.ajax({
+		url: baseUrl + "/ehr",
+		type: "POST",
+		success: function(data){
+			var ehrid = data.ehrId;
+			var party_data = {
+				firstNames: ime,
+				lastNames: priimek,
+				dateOfBirth: datum_rojstva,
+				partyAdditionalInfo: [{key: "ehrid", value: ehrid}]
+			};
+			$.ajax({
+				url: baseUrl + "/demographics/party",
+				type: "POST",
+				contentType: "application/json",
+				data: JSON.stringify(party_data),
+				success: function(party){
+					if(party.action == "CREATE"){
+						sporocilo = "Uspešno kreirah EHR zapis za " + ime + " " +
+								priimek + ". EHRID = " + ehrid;
+						return ehrid;
+					}
+				},
+				error: function(err){
+					sporocilo = "Napaka! Poskusite ponovno. " + JSON.parse(err.responseText).userMessage;
+				}
+			});
+		}
+	});
+}
+
+
+function preberiPodatkeJSON(){
+	
+
+}
+
 
 // TODO: Tukaj implementirate funkcionalnost, ki jo podpira vaša aplikacija
+$(function(){
+
+	$("#prikazGraf").click(function(){
+		preberiPodatkeJSON();
+		console.log("demo");
+	})
+	
+	$("#generiraj").click(function(){
+		for(var i = 1; i<4; i++)
+			ehrid = generirajPodatke(i);
+			//add to dropdown list
+	});
+	
+	$("#ustvariZapis").click(function(){
+		var ime = $("#ime").val();
+		var priimek = $("#priimek").val();
+		var datum_rojstva = $("#datum_rojstva").val();
+		console.log(ime + " " + priimek);
+	});
+	
+});

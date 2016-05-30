@@ -10,6 +10,7 @@
   <script src="knjiznice/js/jquery-2.2.3.min.js"></script>
   <script src="knjiznice/js/bootstrap.min.js"></script>
   <script src="knjiznice/js/koda.js"></script>
+  <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 </head>
 <body>
 
@@ -22,14 +23,14 @@
           <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
         </button>
         <!-- ZAČETEK: Ime vaše aplikacije -->
-        <a class="navbar-brand" href="index.html">{ime vaše aplikacije}</a>
+        <a class="navbar-brand" href="index.html">Pod pritiskom</a>
         <!-- KONEC: Ime vaše aplikacije -->
       </div>
       <div class="collapse navbar-collapse" id="menujska-vrstica">
         <ul class="nav navbar-nav">
           <li><a href="opis.html">Opis ideje</a></li>
           <li><a href="nacrt.html">Načrt informacijske rešitve</a></li>
-          <li><a href="#">Generiranje podatkov</a></li>
+          <li><a id="generiraj" href="#">Generiranje podatkov</a></li>
         </ul>
       </div>
     </div>
@@ -39,9 +40,67 @@
   <!-- ZAČETEK: Vsebina aplikacije -->
   <div class="container">
     <div class="row">
-      <div class="col-lg-12 text-center">
-        <p class="lead"><strong>TO-DO</strong>: Na tem mestu implementirajte vašo aplikacijo.</p>
+      <div class="col-lg-6 text-center">
+    	  <h3>Ustvarjanje novega zapisa EHR</h3>
+    		<form role="form">
+    			<div class="form-group">
+    				<label for="ime">Ime</label>
+    				<input type="text" id="ime" class="form-control" placeholder="Primož">
+    			</div>
+    			<div class="form-group">
+    				<label for="priimek">Priimek</label>
+    				<input type="text" id="priimek" class="form-control" placeholder="Hrovat">
+    			</div>
+    			<div class="form-group">
+    				<label for="datum_rojstva">Datum rojstva</label>
+    				<input type="text" id="datum_rojstva" class="form-control" placeholder="1996-01-01T00:00">
+    			</div>
+    		</form>
+    		<input id="ustvariZapis" type="button" value="Ustvari nov zapis" class="btn btn-info">
       </div>
+      <div class="col-lg-6 text-center">
+        <h3>Vnašanje meritev</h3>
+        <form role="form">
+          <div class="form-group">
+            <label for="ime">EHRID bolnika</label>
+            <input type="text" id="ehrid_vnos" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="ime">Sistolični (mm[Hg])</label>
+            <input type="text" id="ime" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="priimek">Diastolični</label>
+            <input type="text" id="priimek" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="polozaj">Položaj</label>
+            <select class="form-control" id="polozaj">
+              <option>-</option>
+              <option>Stoječ</option>
+              <option>Sedeč</option>
+              <option>Ležeč</option>
+            </select>
+          </div>
+        </form>
+        <input id="ustvariZapis" type="button" value="Ustvari nov zapis" class="btn btn-info">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-6 text-center">
+        <h3>Branje zapisov EHR o bolnikih</h3>
+        <form role="form">
+          <div class="form-group">
+            <label for="ehrid">EHRID</label>
+            <input type="text" id="ehrid_izpis" class="form-control" placeholder="">
+          </div>
+          <input id="preberiZapis" type="button" value="Preberi" class="btn btn-info">
+        </form>
+      </div>
+      <div class="col-lg-6 text-center">
+          <h4>Graf zadnjih 15 meritev</h4>
+          <button class="btn btn-default" id="prikazGraf">Izris</button>
+        </div>
     </div>
   </div>
   <!-- KONEC: Vsebina aplikacije -->
