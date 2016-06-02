@@ -40,67 +40,122 @@
   <!-- ZAČETEK: Vsebina aplikacije -->
   <div class="container">
     <div class="row">
-      <div class="col-lg-6 text-center">
-    	  <h3>Ustvarjanje novega zapisa EHR</h3>
-    		<form role="form">
-    			<div class="form-group">
-    				<label for="ime">Ime</label>
-    				<input type="text" id="ime" class="form-control" placeholder="Primož">
-    			</div>
-    			<div class="form-group">
-    				<label for="priimek">Priimek</label>
-    				<input type="text" id="priimek" class="form-control" placeholder="Hrovat">
-    			</div>
-    			<div class="form-group">
-    				<label for="datum_rojstva">Datum rojstva</label>
-    				<input type="text" id="datum_rojstva" class="form-control" placeholder="1996-01-01T00:00">
-    			</div>
-    		</form>
-    		<input id="ustvariZapis" type="button" value="Ustvari nov zapis" class="btn btn-info">
-      </div>
-      <div class="col-lg-6 text-center">
-        <h3>Vnašanje meritev</h3>
-        <form role="form">
-          <div class="form-group">
-            <label for="ime">EHRID bolnika</label>
-            <input type="text" id="ehrid_vnos" class="form-control">
+      <div class="col-xs-6 col-md-4 text-center">
+        <div class="panel panel-primary">
+          <div class="panel-heading">  
+            <h5>Ustvarjanje novega zapisa EHR</h5>
           </div>
-          <div class="form-group">
-            <label for="ime">Sistolični (mm[Hg])</label>
-            <input type="text" id="ime" class="form-control">
+          <div class="panel-body">
+        		<form role="form">
+              <div class="col-xs-4">
+          			<div class="form-group form-group-sm">
+          				<label for="ime">Ime</label>
+          				<input type="text" id="ime" class="form-control" placeholder="Primož">
+          			</div>
+              </div>
+              <div class="col-xs-4">
+                <div class="form-group form-group-sm">
+                  <label for="priimek">Priimek</label>
+                  <input type="text" id="priimek" class="form-control" placeholder="Hrovat">
+                </div>
+              </div>
+              <div class="col-xs-4">
+                <div class="form-group form-group-sm">
+                  <label for="spol">Spol</label>
+                  <select class="form-control" id="spol_vnos">
+                    <option>Moški</option>
+                    <option>Ženski</option>
+                  </select>
+                </div>
+              </div>
+        			<div class="form-group form-group-sm">
+        				<label for="datum_rojstva">Datum rojstva</label>
+        				<input type="text" id="datum_rojstva" class="form-control" placeholder="1996-01-01T00:00">
+        			</div>
+        		</form>
+        		<input id="ustvariZapis" type="button" value="Ustvari nov zapis" class="btn btn-info">
           </div>
-          <div class="form-group">
-            <label for="priimek">Diastolični</label>
-            <input type="text" id="priimek" class="form-control">
-          </div>
-          <div class="form-group">
-            <label for="polozaj">Položaj</label>
-            <select class="form-control" id="polozaj">
-              <option>-</option>
-              <option>Stoječ</option>
-              <option>Sedeč</option>
-              <option>Ležeč</option>
-            </select>
-          </div>
-        </form>
-        <input id="ustvariZapis" type="button" value="Ustvari nov zapis" class="btn btn-info">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-lg-6 text-center">
-        <h3>Branje zapisov EHR o bolnikih</h3>
-        <form role="form">
-          <div class="form-group">
-            <label for="ehrid">EHRID</label>
-            <input type="text" id="ehrid_izpis" class="form-control" placeholder="">
-          </div>
-          <input id="preberiZapis" type="button" value="Preberi" class="btn btn-info">
-        </form>
-      </div>
-      <div class="col-lg-6 text-center">
-          <h4>Graf zadnjih 15 meritev</h4>
-          <button class="btn btn-default" id="prikazGraf">Izris</button>
         </div>
+        <div id="sporocilo_ustvari"></div>
+      </div>
+
+      <div class="col-xs-6 col-md-4 text-center">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h5>Branje zapisov EHR o bolnikih</h5>
+          </div>
+          <div class="panel-body">
+            <form role="form">
+              <div class="form-group form-group-sm">
+                <label>Pacient</label>
+                <select class="form-control" id="pacient">
+                  <option></option>
+                  <option>Janez Bolan</option>
+                  <option>Marija Kovač</option>
+                  <option>Matic Oblak</option>
+                </select>
+              </div>
+              <div class="form-group form-group-sm">
+                <label for="ehrid">EHRID</label>
+                <input type="text" id="ehrid_izpis" class="form-control" placeholder="">
+              </div>
+              <input id="preberiZapis" type="button" value="Preberi" class="btn btn-info">
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-12 col-md-4 text-center">
+        <div class="panel panel-primary">
+          <div class="panel-heading">  
+            <h5>Vnašanje meritev</h5>
+          </div>
+          <div class="panel-body">
+            <form role="form">
+              <div class="form-group form-group-sm">
+                <label for="ime">EHRID bolnika</label>
+                <input type="text" id="ehrid_vnos" class="form-control">
+              </div>
+              <div class="form-group form-group-sm">
+                <label for="ime">Sistolični (mm[Hg])</label>
+                <input type="text" id="sistolicni_vnos" class="form-control" placeholder="125">
+              </div>
+              <div class="form-group form-group-sm">
+                <label for="priimek">Diastolični</label>
+                <input type="text" id="diastolicni_vnos" class="form-control" placeholder="65">
+              </div>
+              <div class="form-group form-group-sm form-group form-group-sm-sm">
+                <label for="polozaj">Položaj</label>
+                <select class="form-control" id="polozaj">
+                  <option>Sedeč</option>
+                  <option>Stoječ</option>
+                  <option>Ležeč</option>
+                </select>
+              </div>
+              <div class="form-group form-group-sm form-group form-group-sm-sm">
+                <label for="datum_meritve">Datum meritve</label>
+                <input type="text" id="datum_meritve" class="form-control" placeholder="2016-06-01T09:40">
+              </div>
+            </form>
+            <input id="ustvariVnos" type="button" value="Nov vnos" class="btn btn-info">
+          </div>
+        </div>
+        <div id="sporocilo_vnos"></div>
+      </div>
+
+      
+    </div>
+
+    <div class="row">
+      <div class="col-xs-6 col-md-4 text-center">
+         <div class="panel-group" id="accordion">
+          
+          
+        </div> 
+      </div>
+      <div class="col-xs-6 col-md-8 text-center">
+          <h4>Graf zadnjih 15 meritev</h4>
+      </div>
     </div>
   </div>
   <!-- KONEC: Vsebina aplikacije -->
