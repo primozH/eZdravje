@@ -10,7 +10,7 @@
   <script src="knjiznice/js/jquery-2.2.3.min.js"></script>
   <script src="knjiznice/js/bootstrap.min.js"></script>
   <script src="knjiznice/js/koda.js"></script>
-  <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
 <body>
 
@@ -73,7 +73,7 @@
         				<input type="text" id="datum_rojstva" class="form-control" placeholder="1996-01-01T00:00">
         			</div>
         		</form>
-        		<input id="ustvariZapis" type="button" value="Ustvari nov zapis" class="btn btn-info">
+        		<input id="ustvariZapis" type="button" value="Ustvari nov zapis" class="btn btn-success">
           </div>
         </div>
         <div id="sporocilo_ustvari"></div>
@@ -99,7 +99,7 @@
                 <label for="ehrid">EHRID</label>
                 <input type="text" id="ehrid_izpis" class="form-control" placeholder="">
               </div>
-              <input id="preberiZapis" type="button" value="Preberi" class="btn btn-info">
+              <button class="btn btn-info" id="preberiZapis">Preberi zapis</button>
             </form>
           </div>
         </div>
@@ -125,14 +125,6 @@
                 <input type="text" id="diastolicni_vnos" class="form-control" placeholder="65">
               </div>
               <div class="form-group form-group-sm form-group form-group-sm-sm">
-                <label for="polozaj">Položaj</label>
-                <select class="form-control" id="polozaj">
-                  <option>Sedeč</option>
-                  <option>Stoječ</option>
-                  <option>Ležeč</option>
-                </select>
-              </div>
-              <div class="form-group form-group-sm form-group form-group-sm-sm">
                 <label for="datum_meritve">Datum meritve</label>
                 <input type="text" id="datum_meritve" class="form-control" placeholder="2016-06-01T09:40">
               </div>
@@ -141,20 +133,21 @@
           </div>
         </div>
         <div id="sporocilo_vnos"></div>
-      </div>
+      </div>     
 
       
     </div>
 
     <div class="row">
-      <div class="col-xs-6 col-md-4 text-center">
-         <div class="panel-group" id="accordion">
-          
-          
+
+      <div class="col-xs-6 col-md-4 text-center" id="tabela">
+        <div class="panel-group" id="accordion">
         </div> 
-      </div>
+      </div> 
+      
       <div class="col-xs-6 col-md-8 text-center">
-          <h4>Graf zadnjih 15 meritev</h4>
+          <div id="graf"></div>
+          <div id="info_box"></div>
       </div>
     </div>
   </div>
