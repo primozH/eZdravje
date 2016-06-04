@@ -211,6 +211,7 @@ function vnosPodatkov(ehrid, sistolicni, diastolicni, polozaj, datumUra, callbac
 
 function izpisPodatkov(ehrid, callback){
 	var sessionid = getSessionId();
+	tabela = [];
 	$.ajax({
 		url: baseUrl + "/demographics/ehr/" + ehrid + "/party",
 		type: "GET",
@@ -238,10 +239,11 @@ function izpisPodatkov(ehrid, callback){
               					<div class="panel-body"><ul><li>Sistolični: ' + sis + 
               					'</li><li>Diastolični: ' + dia + '</li><li>Datum: ' + datum +'</li></ul></div></div></div>';
               				$("#accordion").append(izpis);
-              				napolniTabelo(parseInt(i), sis, dia, dt);
+              				napolniTabelo(sis, dia, dt);
           				}
           				preveriTlak();
-          				drawCrosshairs();					
+          				drawCrosshairs();
+          				callback(rezultat);					
 					}
 					else
 						$("#accordion").append("<div class='alert alert-danger fade in'>" +
@@ -254,16 +256,18 @@ function izpisPodatkov(ehrid, callback){
                           	Napaka!" + JSON.parse(napaka.responseText).userMessage + " </div>");
 				}
 			});
+		},
+		error: function(napaka){
+			console.log(JSON.stringify(napaka));
 		}
 	});
-	callback(true);
+	callback(false);
 }
 
-function napolniTabelo(i, sis, dia, dt){
+function napolniTabelo(sis, dia, dt){
 	var dat = new Date(dt.split("T")[0]);
 
-	tabela[i] = [dat, sis, dia];
-	console.log(tabela[i]);
+	tabela.push([dat, sis, dia]);
 }
 
 function preveriTlak(){
@@ -332,10 +336,7 @@ function podatkiWiki(){
 }
 
 
-var tabela = [
-		[0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0],
-		[0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0],
-		];
+var tabela = [];
 
 
 
@@ -356,6 +357,7 @@ var pacienti = {
 
 
 $(function(){
+	console.log("start");
 
 	google.charts.load('current', {packages: ['corechart', 'line']});
 google.charts.setOnLoadCallback(drawCrosshairs);
@@ -385,8 +387,13 @@ google.charts.setOnLoadCallback(drawCrosshairs);
 
 	$("#preberiZapis").click(function(){
 		var ehrid = $("#ehrid_izpis").val();
-		izpisPodatkov(ehrid, function(data){
+		if(ehrid == null || ehrid.length == 0){
+			$("#ehrid_izpis").attr("placeholder", "Napaka!");
 
+		}
+		else
+			izpisPodatkov(ehrid, function(data){
+		
 		});
 	});
 

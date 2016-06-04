@@ -47,9 +47,9 @@
             <!-- ZAČETEK: Opis ideje, ki jo aplikacija podpira -->
             <p>
 			Aplikacija "Pod pritiskom", je namenjena podpori spremljanja krvnega tlaka. Omogoča vnos
-			meritev, v primeru povišanega krvnega tlaka pa uporabnika na to opozori, v vpogled mu ponudi
-			 povišanega krvnega tlaka. Možen je tudi pregled zadnjih 10 meritev v obliki grafa.
-			Aplikacija je namenjena splošnemu uporabniku.
+			meritev, v primeru povišanega krvnega tlaka pa uporabnika na to opozori, prikaže pa tudi kratko
+      razlago o visokem krvnem tlaku. Za vsakega uporabnika se ob izpisu zadnjih 10 vnosov izriše tudi graf.
+			Aplikacija je namenjena splošnemi uporabi.
 			</p>
             <!-- KONEC: Opis ideje, ki jo aplikacija podpira -->
           </div>
@@ -60,7 +60,7 @@
           </div>
           <div class="panel-body">
             <!-- ZAČETEK: Uporabljeni zunanji viri podatkov -->
-            <p><strong>TO-DO</strong>: Na tem mestu je navesti zunanji vir podatkov (URL naslov), na kakšen način ste ga uporabili (neposredni API klic, uvožena statična datoteka ipd.) in kaj je bil namen uporabe (kako se vključuje v osnovno idejo aplikacije).</p>
+            <p>Aplikacija dostopa do članka na Wikipedii. Uporablja njene API klice, z baznim naslovom (https://sl.wikipedia.org/w/api.php). S pomočjo parametrov iz spletne enciklopedije uvozi samo prvi (uvodni) del članka in ga prikaže uporabniku, za katerega se na podlagi zadnjih 10 meritev izkaže, da obstajajo določena zdravsvena tveganja. Namen vključitve je na kratko seznaniti uporabnika z njegovimi težavami.</p>
             <!-- KONEC: Uporabljeni zunanji viri podatkov -->
           </div>
         </div>
@@ -70,7 +70,7 @@
           </div>
           <div class="panel-body">
             <!-- ZAČETEK: Master/detail načrtovalski vzorec -->
-            <p><strong>TO-DO</strong>: Na tem mestu morate navesti uporabljen master/detail načrtovalski vzorec in na kakšen način ga nameravate uporabiti.</p>
+            <p>Master/detail vzorec je uporabljen pri izpisu meritev. Kot master se prikaže samo zaporedna številka meritve, ob kliku na izbrano meritev, pa so na voljo informacije o sistoličnem in diastoličnem tlaku ter datumu in uri meritve.</p>
             <!-- KONEC: Master/detail načrtovalski vzorec -->
           </div>
         </div>
@@ -80,7 +80,7 @@
           </div>
           <div class="panel-body">
             <!-- ZAČETEK: Uporabljeni zunanji viri podatkov -->
-            <p><strong>TO-DO</strong>: Na tem mestu je potrebno navesti uporabljeno tehniko vizualizacije podatkov (za pomoč lahko uporabite primer iz <a href="https://github.com/mbostock/d3/wiki/Gallery" target="_blank">D3.js galerije</a>) in zakaj je bila ta tehnika izbrana.</p>
+            <p>Za vizualizacijo prebranih podatkov aplikacija dostopa do Google Charts (https://developers.google.com/chart/). Z uporabo njenih APIjev na grafu prikaže zadnjih 10 meritev glede na čas in veličino sistoličnega in diastoličnega krvnega tlaka.</p>
             <!-- KONEC: Uporabljeni zunanji viri podatkov -->
           </div>
         </div>
